@@ -1,4 +1,4 @@
-package org.example.Services;
+package org.example.Services.Categoria;
 
 import org.example.Model.Categoria;
 import org.example.Repository.CategoriaRepository;
@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CriarCategoriaService {
+public class SalvarCategoriaService {
     @Autowired
     CategoriaRepository categoriaRepository;
 
