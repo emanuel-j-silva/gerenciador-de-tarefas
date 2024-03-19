@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @RestController
 public class CategoriaController {
     @Autowired SalvarCategoriaService salvarCategoria;
@@ -31,12 +34,21 @@ public class CategoriaController {
 
     @GetMapping("/categorias")
     public ResponseEntity<List<Categoria>> findAllCategorias(){
-        return ResponseEntity.status(HttpStatus.OK).body(findAll.executar());
+        var listCategorias = findAll.executar();
+        if (!listCategorias.isEmpty()){
+            for(Categoria categoria:listCategorias){
+                long id = categoria.getId();
+                categoria.add(linkTo(methodOn(CategoriaController.class).findOneCategoria(id)).withSelfRel());
+            }
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(listCategorias);
     }
 
     @GetMapping("/categorias/{id}")
     public ResponseEntity<Categoria> findOneCategoria(@PathVariable(value = "id") long id){
-        return ResponseEntity.status(HttpStatus.OK).body(findCategoriaById.executar(id));
+        var categoriaO = findCategoriaById.executar(id);
+        categoriaO.add(linkTo(methodOn(CategoriaController.class).findAllCategorias()).withRel("Categorias list"));
+        return ResponseEntity.status(HttpStatus.OK).body(categoriaO);
     }
 
     @PutMapping("/categorias/{id}")

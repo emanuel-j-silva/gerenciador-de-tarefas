@@ -1,10 +1,14 @@
 package org.example.Model;
 
 import jakarta.persistence.*;
+import org.springframework.hateoas.RepresentationModel;
+
+import java.io.Serializable;
 
 @Entity
 @Table(name = "categorias")
-public class Categoria {
+public class Categoria extends RepresentationModel<Categoria> implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
