@@ -6,4 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TarefaRepository extends JpaRepository<Tarefa,Long> {
+
+    boolean existsByDescricao(String descricao);
+    boolean existsByDescricaoAndIdNot(String descricao, Long id);
+
 }

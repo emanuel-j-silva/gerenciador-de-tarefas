@@ -237,3 +237,9 @@ org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-22
 org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
 2024-03-15 21:24:13.142277-03:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-224]
+2024-03-20 00:47:31.157468-03:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]desc tarefas"; expected "DELETE, DROP"; SQL statement:
+desc tarefas [42001-224]
+2024-03-20 00:47:44.359121-03:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]desc table tarefas"; expected "DELETE, DROP"; SQL statement:
+desc table tarefas [42001-224]
