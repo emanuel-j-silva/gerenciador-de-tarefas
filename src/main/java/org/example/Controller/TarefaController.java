@@ -19,8 +19,12 @@ public class TarefaController {
     @PostMapping("/tarefas")
     public ResponseEntity<Tarefa> salvarTarefa(@RequestBody @Valid TarefaDTO tarefaDTO){
         var tarefa = new Tarefa();
-
-        BeanUtils.copyProperties(tarefaDTO,tarefa);
+        if (tarefaDTO.estado() != null){
+            BeanUtils.copyProperties(tarefaDTO,tarefa);
+        }
+        else {
+            BeanUtils.copyProperties(tarefaDTO, tarefa, "estado");
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(salvarTarefa.executar(tarefa));
     }
 }

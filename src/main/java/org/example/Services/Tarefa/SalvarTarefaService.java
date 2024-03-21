@@ -14,16 +14,9 @@ public class SalvarTarefaService {
     @Autowired
     TarefaRepository tarefaRepository;
 
-    @Autowired
-    CategoriaRepository categoriaRepository;
-
     public Tarefa executar(Tarefa tarefa){
        if (tarefaRepository.existsByDescricao(tarefa.getDescricao())){
            throw new TarefaExistenteException(tarefa.getDescricao());
-       }
-       if (!categoriaRepository.existsById(tarefa.getCategoria().getId())
-               && tarefa.getCategoria() != null){
-           throw new CategoriaNotFoundException();
        }
        return tarefaRepository.save(tarefa);
     }
