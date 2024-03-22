@@ -2,6 +2,7 @@ package org.example.Controller;
 
 import jakarta.validation.Valid;
 import org.example.DTO.TarefaDTO;
+import org.example.Model.Estado;
 import org.example.Model.Tarefa;
 import org.example.Services.Tarefa.SalvarTarefaService;
 import org.springframework.beans.BeanUtils;
@@ -11,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class TarefaController {

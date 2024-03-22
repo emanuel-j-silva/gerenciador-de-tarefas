@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5471b00-2634-4bea-972b-c301611614aa" name="Changes" comment="implementação inicial de criar tarefas">
+    <list default="true" id="f5471b00-2634-4bea-972b-c301611614aa" name="Changes" comment="correção salvar tarefa service">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DATA/gerenciadordetarefas.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/DATA/gerenciadordetarefas.mv.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DATA/gerenciadordetarefas.trace.db" beforeDir="false" afterPath="$PROJECT_DIR$/DATA/gerenciadordetarefas.trace.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controller/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controller/GlobalExceptionHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controller/TarefaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controller/TarefaController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Services/Tarefa/SalvarTarefaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Services/Tarefa/SalvarTarefaService.java" afterDir="false" />
     </list>
@@ -110,7 +111,14 @@
       <option name="project" value="LOCAL" />
       <updated>1710909606456</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="correção salvar tarefa service">
+      <created>1711047675769</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1711047675769</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -120,6 +128,7 @@
     <MESSAGE value="finalização do CRUD de categorias" />
     <MESSAGE value="implementação de serialização e hipermídias em categoria" />
     <MESSAGE value="implementação inicial de criar tarefas" />
-    <option name="LAST_COMMIT_MESSAGE" value="implementação inicial de criar tarefas" />
+    <MESSAGE value="correção salvar tarefa service" />
+    <option name="LAST_COMMIT_MESSAGE" value="correção salvar tarefa service" />
   </component>
 </project>
