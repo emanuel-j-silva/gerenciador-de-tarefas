@@ -24,6 +24,7 @@ public class Tarefa extends RepresentationModel<Tarefa> implements Serializable 
     private Estado estado = Estado.BACKLOG;
 
     @ManyToOne
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
     public long getId() {
