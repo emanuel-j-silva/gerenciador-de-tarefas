@@ -4,15 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5471b00-2634-4bea-972b-c301611614aa" name="Changes" comment="tratamento de exceção para valores de entrada inválidos">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATA/gerenciadordetarefas.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/DATA/gerenciadordetarefas.mv.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATA/gerenciadordetarefas.trace.db" beforeDir="false" afterPath="$PROJECT_DIR$/DATA/gerenciadordetarefas.trace.db" afterDir="false" />
+    <list default="true" id="f5471b00-2634-4bea-972b-c301611614aa" name="Changes" comment="mapeamento de entidades">
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controller/TarefaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controller/TarefaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/DTO/TarefaDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/DTO/TarefaDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Model/Tarefa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Model/Tarefa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Services/Categoria/FindCategoriaByIdService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Services/Categoria/FindCategoriaByIdService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Services/Tarefa/SalvarTarefaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Services/Tarefa/SalvarTarefaService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +120,14 @@
       <option name="project" value="LOCAL" />
       <updated>1711136354038</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="mapeamento de entidades">
+      <created>1711198136605</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1711198136605</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -139,6 +139,7 @@
     <MESSAGE value="implementação inicial de criar tarefas" />
     <MESSAGE value="correção salvar tarefa service" />
     <MESSAGE value="tratamento de exceção para valores de entrada inválidos" />
-    <option name="LAST_COMMIT_MESSAGE" value="tratamento de exceção para valores de entrada inválidos" />
+    <MESSAGE value="mapeamento de entidades" />
+    <option name="LAST_COMMIT_MESSAGE" value="mapeamento de entidades" />
   </component>
 </project>

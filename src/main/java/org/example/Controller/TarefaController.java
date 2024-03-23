@@ -26,8 +26,10 @@ public class TarefaController {
     @PostMapping("/tarefas")
     public ResponseEntity<Tarefa> salvarTarefa(@RequestBody @Valid TarefaDTO tarefaDTO){
         var tarefa = new Tarefa();
-        Optional<Categoria> categoria = Optional.ofNullable(findCategoria.executar(tarefaDTO.categoriaId()));
-        if (!categoria.equals(null)) tarefa.setCategoria(categoria.get());
+        if (tarefaDTO.categoriaId() != null) {
+            Optional<Categoria> categoria = Optional.ofNullable(findCategoria.executar(tarefaDTO.categoriaId()));
+            if (!categoria.equals(null)) tarefa.setCategoria(categoria.get());
+        }
         if (tarefaDTO.estado() != null){
             BeanUtils.copyProperties(tarefaDTO,tarefa);
         }
