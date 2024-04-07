@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5471b00-2634-4bea-972b-c301611614aa" name="Changes" comment="criação dos métodos GET simples para tarefa">
+    <list default="true" id="f5471b00-2634-4bea-972b-c301611614aa" name="Changes" comment="atualização do serviço de excluir categoria (atrbiuindo null às tarefas que estiverem contidas na categoria excluída)">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Services/Tarefa/ExcluirTarefaService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DATA/gerenciadordetarefas.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/DATA/gerenciadordetarefas.mv.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATA/gerenciadordetarefas.trace.db" beforeDir="false" afterPath="$PROJECT_DIR$/DATA/gerenciadordetarefas.trace.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Repository/TarefaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Repository/TarefaRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Services/Categoria/ExcluirCategoriaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Services/Categoria/ExcluirCategoriaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controller/TarefaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controller/TarefaController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,7 +144,14 @@
       <option name="project" value="LOCAL" />
       <updated>1712112914491</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="atualização do serviço de excluir categoria (atrbiuindo null às tarefas que estiverem contidas na categoria excluída)">
+      <created>1712279495431</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1712279495431</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -160,6 +166,7 @@
     <MESSAGE value="mapeamento de entidades" />
     <MESSAGE value="correção do tratamento de valores de entrada para criar tarefa" />
     <MESSAGE value="criação dos métodos GET simples para tarefa" />
-    <option name="LAST_COMMIT_MESSAGE" value="criação dos métodos GET simples para tarefa" />
+    <MESSAGE value="atualização do serviço de excluir categoria (atrbiuindo null às tarefas que estiverem contidas na categoria excluída)" />
+    <option name="LAST_COMMIT_MESSAGE" value="atualização do serviço de excluir categoria (atrbiuindo null às tarefas que estiverem contidas na categoria excluída)" />
   </component>
 </project>

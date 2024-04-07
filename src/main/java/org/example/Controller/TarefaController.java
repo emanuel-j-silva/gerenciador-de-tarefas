@@ -5,6 +5,7 @@ import org.example.DTO.TarefaDTO;
 import org.example.Model.Categoria;
 import org.example.Model.Tarefa;
 import org.example.Services.Categoria.FindCategoriaByIdService;
+import org.example.Services.Tarefa.ExcluirTarefaService;
 import org.example.Services.Tarefa.FindAllTarefaService;
 import org.example.Services.Tarefa.FindTarefaByIdService;
 import org.example.Services.Tarefa.SalvarTarefaService;
@@ -27,6 +28,8 @@ public class TarefaController {
 
     @Autowired FindTarefaByIdService findTarefaById;
     @Autowired FindAllTarefaService findAllTarefa;
+
+    @Autowired ExcluirTarefaService excluirTarefa;
 
     @PostMapping("/tarefas")
     public ResponseEntity<Tarefa> salvarTarefa(@RequestBody @Valid TarefaDTO tarefaDTO){
@@ -61,5 +64,12 @@ public class TarefaController {
         var tarefaO = findTarefaById.executar(id);
         tarefaO.add(linkTo(methodOn(TarefaController.class).findAllTarefas()).withRel("Tarefas list"));
         return ResponseEntity.status(HttpStatus.OK).body(tarefaO);
+    }
+
+
+    @DeleteMapping("/tarefas/{id}")
+    public ResponseEntity<Object> deletarTarefa(@PathVariable(value = "id") long id){
+        var tarefa = findTarefaById.executar(id);
+        return ResponseEntity.status(HttpStatus.OK).body(excluirTarefa.executar(tarefa));
     }
 }
