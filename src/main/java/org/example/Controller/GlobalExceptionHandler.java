@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -22,7 +23,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(CategoriaListIsEmptyException.class)
     public ResponseEntity<String> handleCategoriaListIsEmptyException(CategoriaListIsEmptyException ex){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(ex.getMessage());
     }
     @ExceptionHandler(TarefaExistenteException.class)
     public ResponseEntity<String> handleTarefaExistenteException(TarefaExistenteException ex){
@@ -40,6 +41,11 @@ public class GlobalExceptionHandler {
     }
     @ExceptionHandler(TarefaListIsEmptyException.class)
     public ResponseEntity<String> handleTarefaListIsEmptyException(TarefaListIsEmptyException ex){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(TarefaEstadoListIsEmptyException.class)
+    public ResponseEntity<String> handleTarefaEstadoListIsEmptyException(TarefaEstadoListIsEmptyException ex){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 }

@@ -3,12 +3,10 @@ package org.example.Controller;
 import jakarta.validation.Valid;
 import org.example.DTO.TarefaDTO;
 import org.example.Model.Categoria;
+import org.example.Model.Estado;
 import org.example.Model.Tarefa;
 import org.example.Services.Categoria.FindCategoriaByIdService;
-import org.example.Services.Tarefa.ExcluirTarefaService;
-import org.example.Services.Tarefa.FindAllTarefaService;
-import org.example.Services.Tarefa.FindTarefaByIdService;
-import org.example.Services.Tarefa.SalvarTarefaService;
+import org.example.Services.Tarefa.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +26,7 @@ public class TarefaController {
 
     @Autowired FindTarefaByIdService findTarefaById;
     @Autowired FindAllTarefaService findAllTarefa;
-
+    @Autowired FindTarefasByEstadoService findTarefasByEstado;
     @Autowired ExcluirTarefaService excluirTarefa;
 
     @PostMapping("/tarefas")
@@ -64,6 +62,54 @@ public class TarefaController {
         var tarefaO = findTarefaById.executar(id);
         tarefaO.add(linkTo(methodOn(TarefaController.class).findAllTarefas()).withRel("Tarefas list"));
         return ResponseEntity.status(HttpStatus.OK).body(tarefaO);
+    }
+
+    @GetMapping("/tarefas/backlog")
+    public ResponseEntity<List<Tarefa>> findAllBacklogTarefas(){
+        var listBacklogTarefas = findTarefasByEstado.executar(Estado.BACKLOG);
+        if (!listBacklogTarefas.isEmpty()){
+            for (Tarefa tarefa:listBacklogTarefas){
+                long id = tarefa.getId();
+                tarefa.add(linkTo(methodOn(TarefaController.class).findOneTarefa(id)).withSelfRel());
+            }
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(listBacklogTarefas);
+    }
+
+    @GetMapping("/tarefas/em-andamento")
+    public ResponseEntity<List<Tarefa>> findAllEmAndamentoTarefas(){
+        var listEmAndamentoTarefas = findTarefasByEstado.executar(Estado.EM_ANDAMENTO);
+        if (!listEmAndamentoTarefas.isEmpty()){
+            for (Tarefa tarefa:listEmAndamentoTarefas){
+                long id = tarefa.getId();
+                tarefa.add(linkTo(methodOn(TarefaController.class).findOneTarefa(id)).withSelfRel());
+            }
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(listEmAndamentoTarefas);
+    }
+
+    @GetMapping("/tarefas/atrasadas")
+    public ResponseEntity<List<Tarefa>> findAllAtrasadaTarefas(){
+        var listAtrasadaTarefas = findTarefasByEstado.executar(Estado.ATRASADA);
+        if (!listAtrasadaTarefas.isEmpty()){
+            for (Tarefa tarefa:listAtrasadaTarefas){
+                long id = tarefa.getId();
+                tarefa.add(linkTo(methodOn(TarefaController.class).findOneTarefa(id)).withSelfRel());
+            }
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(listAtrasadaTarefas);
+    }
+
+    @GetMapping("/tarefas/concluidas")
+    public ResponseEntity<List<Tarefa>> findAllConcluidaTarefas(){
+        var listConcluidaTarefas = findTarefasByEstado.executar(Estado.CONCLUIDA);
+        if (!listConcluidaTarefas.isEmpty()){
+            for (Tarefa tarefa:listConcluidaTarefas){
+                long id = tarefa.getId();
+                tarefa.add(linkTo(methodOn(TarefaController.class).findOneTarefa(id)).withSelfRel());
+            }
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(listConcluidaTarefas);
     }
 
 

@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5471b00-2634-4bea-972b-c301611614aa" name="Changes" comment="atualização do serviço de excluir categoria (atrbiuindo null às tarefas que estiverem contidas na categoria excluída)">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Services/Tarefa/ExcluirTarefaService.java" afterDir="false" />
+    <list default="true" id="f5471b00-2634-4bea-972b-c301611614aa" name="Changes" comment="criação do service de excluir tarefa">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Services/Tarefa/FindTarefasByEstadoService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Utils/TarefaEstadoListIsEmptyException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DATA/gerenciadordetarefas.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/DATA/gerenciadordetarefas.mv.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controller/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controller/GlobalExceptionHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controller/TarefaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controller/TarefaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Utils/TarefaListIsEmptyException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Utils/TarefaListIsEmptyException.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +154,14 @@
       <option name="project" value="LOCAL" />
       <updated>1712279495431</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="criação do service de excluir tarefa">
+      <created>1712525982074</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1712525982074</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -167,6 +177,7 @@
     <MESSAGE value="correção do tratamento de valores de entrada para criar tarefa" />
     <MESSAGE value="criação dos métodos GET simples para tarefa" />
     <MESSAGE value="atualização do serviço de excluir categoria (atrbiuindo null às tarefas que estiverem contidas na categoria excluída)" />
-    <option name="LAST_COMMIT_MESSAGE" value="atualização do serviço de excluir categoria (atrbiuindo null às tarefas que estiverem contidas na categoria excluída)" />
+    <MESSAGE value="criação do service de excluir tarefa" />
+    <option name="LAST_COMMIT_MESSAGE" value="criação do service de excluir tarefa" />
   </component>
 </project>
