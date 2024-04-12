@@ -48,4 +48,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleTarefaEstadoListIsEmptyException(TarefaEstadoListIsEmptyException ex){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
+
+    @ExceptionHandler(TarefaEstadoCriacaoException.class)
+    public ResponseEntity<String> handleTarefaEstadoCriacaoException(TarefaEstadoCriacaoException ex){
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(ex.getMessage());
+    }
 }

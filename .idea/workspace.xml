@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5471b00-2634-4bea-972b-c301611614aa" name="Changes" comment="criação do service de excluir tarefa">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Services/Tarefa/FindTarefasByEstadoService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Utils/TarefaEstadoListIsEmptyException.java" afterDir="false" />
+    <list default="true" id="f5471b00-2634-4bea-972b-c301611614aa" name="Changes" comment="criação do service de buscar tarefa por estado, criação dos devidos endpoints e atualização do exception handler">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Utils/TarefaEstadoCriacaoException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DATA/gerenciadordetarefas.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/DATA/gerenciadordetarefas.mv.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DATA/gerenciadordetarefas.trace.db" beforeDir="false" afterPath="$PROJECT_DIR$/DATA/gerenciadordetarefas.trace.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controller/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controller/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controller/TarefaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controller/TarefaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Utils/TarefaListIsEmptyException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Utils/TarefaListIsEmptyException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Services/Tarefa/SalvarTarefaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Services/Tarefa/SalvarTarefaService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,7 +160,14 @@
       <option name="project" value="LOCAL" />
       <updated>1712525982074</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="criação do service de buscar tarefa por estado, criação dos devidos endpoints e atualização do exception handler">
+      <created>1712531033284</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1712531033284</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -178,6 +184,7 @@
     <MESSAGE value="criação dos métodos GET simples para tarefa" />
     <MESSAGE value="atualização do serviço de excluir categoria (atrbiuindo null às tarefas que estiverem contidas na categoria excluída)" />
     <MESSAGE value="criação do service de excluir tarefa" />
-    <option name="LAST_COMMIT_MESSAGE" value="criação do service de excluir tarefa" />
+    <MESSAGE value="criação do service de buscar tarefa por estado, criação dos devidos endpoints e atualização do exception handler" />
+    <option name="LAST_COMMIT_MESSAGE" value="criação do service de buscar tarefa por estado, criação dos devidos endpoints e atualização do exception handler" />
   </component>
 </project>
