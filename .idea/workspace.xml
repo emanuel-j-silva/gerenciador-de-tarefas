@@ -4,13 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5471b00-2634-4bea-972b-c301611614aa" name="Changes" comment="criação do service de buscar tarefa por estado, criação dos devidos endpoints e atualização do exception handler">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Utils/TarefaEstadoCriacaoException.java" afterDir="false" />
+    <list default="true" id="f5471b00-2634-4bea-972b-c301611614aa" name="Changes" comment="criação de exceção - estado de criação de tarefa inconsistente">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Services/Tarefa/FindTarefaByCategoriaService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Utils/TarefaCategoriaListIsEmptyException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DATA/gerenciadordetarefas.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/DATA/gerenciadordetarefas.mv.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DATA/gerenciadordetarefas.trace.db" beforeDir="false" afterPath="$PROJECT_DIR$/DATA/gerenciadordetarefas.trace.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controller/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controller/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Services/Tarefa/SalvarTarefaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Services/Tarefa/SalvarTarefaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controller/TarefaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controller/TarefaController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +168,14 @@
       <option name="project" value="LOCAL" />
       <updated>1712531033284</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="criação de exceção - estado de criação de tarefa inconsistente">
+      <created>1712890765415</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1712890765415</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -185,6 +193,7 @@
     <MESSAGE value="atualização do serviço de excluir categoria (atrbiuindo null às tarefas que estiverem contidas na categoria excluída)" />
     <MESSAGE value="criação do service de excluir tarefa" />
     <MESSAGE value="criação do service de buscar tarefa por estado, criação dos devidos endpoints e atualização do exception handler" />
-    <option name="LAST_COMMIT_MESSAGE" value="criação do service de buscar tarefa por estado, criação dos devidos endpoints e atualização do exception handler" />
+    <MESSAGE value="criação de exceção - estado de criação de tarefa inconsistente" />
+    <option name="LAST_COMMIT_MESSAGE" value="criação de exceção - estado de criação de tarefa inconsistente" />
   </component>
 </project>

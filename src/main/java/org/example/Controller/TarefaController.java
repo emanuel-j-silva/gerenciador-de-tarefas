@@ -27,6 +27,8 @@ public class TarefaController {
     @Autowired FindTarefaByIdService findTarefaById;
     @Autowired FindAllTarefaService findAllTarefa;
     @Autowired FindTarefasByEstadoService findTarefasByEstado;
+    @Autowired FindTarefaByCategoriaService findTarefasByCategoria;
+
     @Autowired ExcluirTarefaService excluirTarefa;
 
     @PostMapping("/tarefas")
@@ -46,8 +48,14 @@ public class TarefaController {
     }
 
     @GetMapping("/tarefas")
-    public ResponseEntity<List<Tarefa>> findAllTarefas(){
-        var listTarefas = findAllTarefa.executar();
+    public ResponseEntity<List<Tarefa>> findAllTarefas(
+            @RequestParam(value = "categoria",required = false) Long categoriaId){
+        List<Tarefa> listTarefas;
+        if (categoriaId != null){
+            listTarefas = findTarefasByCategoria.executar(categoriaId);
+        } else{
+            listTarefas = findAllTarefa.executar();
+        }
         if (!listTarefas.isEmpty()){
             for (Tarefa tarefa:listTarefas){
                 long id = tarefa.getId();
@@ -60,7 +68,8 @@ public class TarefaController {
     @GetMapping("/tarefas/{id}")
     public ResponseEntity<Tarefa> findOneTarefa(@PathVariable(value = "id") long id){
         var tarefaO = findTarefaById.executar(id);
-        tarefaO.add(linkTo(methodOn(TarefaController.class).findAllTarefas()).withRel("Tarefas list"));
+        tarefaO.add(linkTo(TarefaController.class).slash("tarefas").withRel("Tarefas list"));
+
         return ResponseEntity.status(HttpStatus.OK).body(tarefaO);
     }
 
@@ -111,6 +120,7 @@ public class TarefaController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(listConcluidaTarefas);
     }
+
 
 
     @DeleteMapping("/tarefas/{id}")
