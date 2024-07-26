@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5471b00-2634-4bea-972b-c301611614aa" name="Changes" comment="criação de exceção - estado de criação de tarefa inconsistente">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Services/Tarefa/FindTarefaByCategoriaService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Utils/TarefaCategoriaListIsEmptyException.java" afterDir="false" />
+    <list default="true" id="f5471b00-2634-4bea-972b-c301611614aa" name="Changes" comment="inclusão do endpoint de busca de tarefas por categoria">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATA/gerenciadordetarefas.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/DATA/gerenciadordetarefas.mv.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DATA/gerenciadordetarefas.trace.db" beforeDir="false" afterPath="$PROJECT_DIR$/DATA/gerenciadordetarefas.trace.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controller/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controller/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controller/TarefaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controller/TarefaController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +169,14 @@
       <option name="project" value="LOCAL" />
       <updated>1712890765415</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="inclusão do endpoint de busca de tarefas por categoria">
+      <created>1713629521790</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1713629521790</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -194,6 +195,7 @@
     <MESSAGE value="criação do service de excluir tarefa" />
     <MESSAGE value="criação do service de buscar tarefa por estado, criação dos devidos endpoints e atualização do exception handler" />
     <MESSAGE value="criação de exceção - estado de criação de tarefa inconsistente" />
-    <option name="LAST_COMMIT_MESSAGE" value="criação de exceção - estado de criação de tarefa inconsistente" />
+    <MESSAGE value="inclusão do endpoint de busca de tarefas por categoria" />
+    <option name="LAST_COMMIT_MESSAGE" value="inclusão do endpoint de busca de tarefas por categoria" />
   </component>
 </project>
