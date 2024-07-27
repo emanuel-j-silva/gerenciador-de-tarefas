@@ -1,0 +1,1 @@
+web: java -jar target/gerenciador_de_tarefas-0.0.1-SNAPSHOT.jar
