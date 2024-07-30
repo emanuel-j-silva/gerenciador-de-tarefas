@@ -14,7 +14,7 @@ import java.util.Optional;
 @Service
 public class AtualizarTarefaService {
     @Autowired
-    private TarefaRepository tarefaRepository;
+    TarefaRepository tarefaRepository;
 
     private Tarefa atualizar(Tarefa tarefa){
         Tarefa oldTarefa = tarefaRepository.findById(tarefa.getId())
