@@ -9,9 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
-
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
@@ -47,9 +44,31 @@ class CategoriaRepositoryTest {
     }
 
     @Test
-    void existsByNomeAndIdNot() {
+    @DisplayName("Retorna true ao procurar uma categoria com mesmo nome e id diferente")
+    void existsByNomeAndIdNotSuccess() {
+        CategoriaDTO data1 = new CategoriaDTO("Séries");
+        Categoria cat1 = this.createCategoria(data1);
+        Categoria cat2 = this.createCategoria(data1);
+
+        boolean existsByNomeAndIdNot = this.categoriaRepository.existsByNomeAndIdNot(
+                cat2.getNome(),cat2.getId());
+
+        assertTrue(existsByNomeAndIdNot);
     }
 
+    @Test
+    @DisplayName("Retorna false ao criar categorias com nomes diferentes")
+    void existsByNomeAndIdNotFail() {
+        CategoriaDTO data1 = new CategoriaDTO("Jogo");
+        CategoriaDTO data2 = new CategoriaDTO("Jogos");
+        Categoria cat1 = this.createCategoria(data1);
+        Categoria cat2 = this.createCategoria(data2);
+
+        boolean existsByNomeAndIdNot = this.categoriaRepository.existsByNomeAndIdNot(
+                cat2.getNome(),cat2.getId());
+
+        assertFalse(existsByNomeAndIdNot);
+    }
     private Categoria createCategoria(CategoriaDTO categoriaDTO){
         Categoria newCategoria = new Categoria(categoriaDTO.nome());
         this.entityManager.persist(newCategoria);
