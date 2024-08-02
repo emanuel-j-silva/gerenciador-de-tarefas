@@ -17,11 +17,10 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 public class CategoriaController {
-    @Autowired SalvarCategoriaService salvarCategoria;
-    @Autowired FindCategoriaByIdService findCategoriaById;
-    @Autowired FindAllCategoriaService findAll;
-    @Autowired AtualizarCategoriaService atualizarCategoria;
-    @Autowired ExcluirCategoriaService excluirCategoria;
+    @Autowired private SalvarCategoriaService salvarCategoria;
+    @Autowired private AtualizarCategoriaService atualizarCategoria;
+    @Autowired private ExcluirCategoriaService excluirCategoria;
+    @Autowired private FindCategoriaService findCategoria;
 
 
 
@@ -34,19 +33,22 @@ public class CategoriaController {
 
     @GetMapping("/categorias")
     public ResponseEntity<List<Categoria>> findAllCategorias(){
-        var listCategorias = findAll.executar();
-        if (!listCategorias.isEmpty()){
-            for(Categoria categoria:listCategorias){
-                long id = categoria.getId();
-                categoria.add(linkTo(methodOn(CategoriaController.class).findOneCategoria(id)).withSelfRel());
-            }
+        var listCategorias = findCategoria.findAll();
+
+        if (listCategorias.isEmpty())
+            return ResponseEntity.noContent().build();
+
+        for(Categoria categoria:listCategorias){
+            long id = categoria.getId();
+            categoria.add(linkTo(methodOn(CategoriaController.class).findOneCategoria(id)).withSelfRel());
         }
+
         return ResponseEntity.status(HttpStatus.OK).body(listCategorias);
     }
 
     @GetMapping("/categorias/{id}")
     public ResponseEntity<Categoria> findOneCategoria(@PathVariable(value = "id") long id){
-        var categoriaO = findCategoriaById.executar(id);
+        var categoriaO = findCategoria.findById(id);
         categoriaO.add(linkTo(methodOn(CategoriaController.class).findAllCategorias()).withRel("Categorias list"));
         return ResponseEntity.status(HttpStatus.OK).body(categoriaO);
     }
@@ -54,14 +56,14 @@ public class CategoriaController {
     @PutMapping("/categorias/{id}")
     public ResponseEntity<Object> atualizarCategoria(@PathVariable(value = "id") long id,
                                                      @RequestBody @Valid CategoriaDTO categoriaDTO){
-        var categoria = findCategoriaById.executar(id);
+        var categoria = findCategoria.findById(id);
         BeanUtils.copyProperties(categoriaDTO,categoria);
         return ResponseEntity.status(HttpStatus.OK).body(atualizarCategoria.executar(categoria));
     }
 
     @DeleteMapping("/categorias/{id}")
     public ResponseEntity<Object> deletarCategoria(@PathVariable(value = "id") long id){
-        var categoria = findCategoriaById.executar(id);
+        var categoria = findCategoria.findById(id);
         return ResponseEntity.status(HttpStatus.OK).body(excluirCategoria.executar(categoria));
     }
 }

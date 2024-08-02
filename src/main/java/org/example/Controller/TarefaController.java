@@ -5,7 +5,7 @@ import org.example.DTO.TarefaDTO;
 import org.example.Model.Categoria;
 import org.example.Model.Estado;
 import org.example.Model.Tarefa;
-import org.example.Services.Categoria.FindCategoriaByIdService;
+import org.example.Services.Categoria.FindCategoriaService;
 import org.example.Services.Tarefa.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,8 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RestController
 public class TarefaController {
     @Autowired SalvarTarefaService salvarTarefa;
-    @Autowired FindCategoriaByIdService findCategoria;
+    @Autowired
+    FindCategoriaService findCategoria;
 
     @Autowired FindTarefaByIdService findTarefaById;
     @Autowired FindAllTarefaService findAllTarefa;
@@ -35,7 +36,7 @@ public class TarefaController {
     public ResponseEntity<Tarefa> salvarTarefa(@RequestBody @Valid TarefaDTO tarefaDTO){
         var tarefa = new Tarefa();
         if (tarefaDTO.categoriaId() != null) {
-            Optional<Categoria> categoria = Optional.ofNullable(findCategoria.executar(tarefaDTO.categoriaId()));
+            Optional<Categoria> categoria = Optional.ofNullable(findCategoria.findById(tarefaDTO.categoriaId()));
             if (!categoria.equals(null)) tarefa.setCategoria(categoria.get());
         }
         if (tarefaDTO.estado() != null){

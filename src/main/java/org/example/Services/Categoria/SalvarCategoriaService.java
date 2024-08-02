@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SalvarCategoriaService {
     @Autowired
-    CategoriaRepository categoriaRepository;
+    private CategoriaRepository categoriaRepository;
 
     public Categoria executar(Categoria categoria){
         if (categoriaRepository.existsByNome(categoria.getNome())){
