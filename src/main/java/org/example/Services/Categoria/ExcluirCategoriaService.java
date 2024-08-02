@@ -14,10 +14,10 @@ import java.util.List;
 public class ExcluirCategoriaService {
 
     @Autowired
-    CategoriaRepository categoriaRepository;
+    private CategoriaRepository categoriaRepository;
 
     @Autowired
-    TarefaRepository tarefaRepository;
+    private TarefaRepository tarefaRepository;
 
     public String executar(Categoria categoria){
         if(!categoriaRepository.existsById(categoria.getId())){

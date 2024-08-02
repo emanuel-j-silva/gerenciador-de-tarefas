@@ -6,17 +6,22 @@ import org.example.Utils.CategoriaNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
-public class FindCategoriaByIdService {
+public class FindCategoriaService {
 
     @Autowired
-    CategoriaRepository categoriaRepository;
+    private CategoriaRepository categoriaRepository;
 
-    public Categoria executar(Long id){
+    public Categoria findById(long id){
         Categoria categoriaExistente = categoriaRepository.findById(id)
-                .orElseThrow(()->new CategoriaNotFoundException());
+                .orElseThrow(() -> new CategoriaNotFoundException());
+
         return categoriaExistente;
+    }
+
+    public List<Categoria> findAll(){
+        return categoriaRepository.findAll();
     }
 }
