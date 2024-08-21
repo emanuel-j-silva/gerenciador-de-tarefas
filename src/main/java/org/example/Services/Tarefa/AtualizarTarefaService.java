@@ -14,9 +14,12 @@ import java.util.Optional;
 @Service
 public class AtualizarTarefaService {
     @Autowired
-    TarefaRepository tarefaRepository;
+    private TarefaRepository tarefaRepository;
 
-    private Tarefa atualizar(Tarefa tarefa){
+    @Autowired
+    private AgendarTarefaService agendarTarefa;
+
+    public Tarefa atualizar(Tarefa tarefa){
         Tarefa oldTarefa = tarefaRepository.findById(tarefa.getId())
                 .orElseThrow(TarefaNotFoundException::new);
 
@@ -26,10 +29,12 @@ public class AtualizarTarefaService {
         if (tarefaRepository.existsByDescricaoAndIdNot(tarefa.getDescricao(), tarefa.getId()))
             throw new TarefaExistenteException(tarefa.getDescricao());
 
-        return tarefaRepository.save(tarefa);
+        Tarefa savedTarefa = tarefaRepository.save(tarefa);
+        agendarTarefa.agendarAtualizacaoTarefa(tarefa);
+        return savedTarefa;
     }
 
-    private Tarefa setTarefaAtrasada(Tarefa tarefa){
+    public void setTarefaAtrasada(Tarefa tarefa){
         if (tarefa.getEstado().equals(Estado.CONCLUIDA))
             throw new IllegalArgumentException("Esta tarefa já foi concluída.");
         if (tarefa.getEstado().equals(Estado.ATRASADA))
@@ -38,7 +43,7 @@ public class AtualizarTarefaService {
             throw new IllegalArgumentException("Esta tarefa ainda está dentro do prazo.");
 
         tarefa.setEstado(Estado.ATRASADA);
-        return tarefaRepository.save(tarefa);
+        tarefaRepository.save(tarefa);
     }
 
     private boolean validEstado(Tarefa tarefa, Estado estado){

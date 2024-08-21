@@ -12,7 +12,10 @@ import org.springframework.stereotype.Service;
 public class SalvarTarefaService {
 
     @Autowired
-    TarefaRepository tarefaRepository;
+    private TarefaRepository tarefaRepository;
+
+    @Autowired
+    private AgendarTarefaService agendarTarefa;
 
     public Tarefa executar(Tarefa tarefa){
        if (tarefaRepository.existsByDescricao(tarefa.getDescricao())){
@@ -21,6 +24,9 @@ public class SalvarTarefaService {
        if (tarefa.getEstado().equals(Estado.ATRASADA)){
            throw new TarefaEstadoCriacaoException();
        }
-       return tarefaRepository.save(tarefa);
+
+        Tarefa savedTarefa = tarefaRepository.save(tarefa);
+        agendarTarefa.agendarAtualizacaoTarefa(tarefa);
+       return savedTarefa;
     }
 }
