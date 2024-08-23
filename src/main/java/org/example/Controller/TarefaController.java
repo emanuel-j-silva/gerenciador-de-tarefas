@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -31,8 +30,8 @@ public class TarefaController {
     public ResponseEntity<Tarefa> salvarTarefa(@RequestBody @Valid TarefaDTO tarefaDTO){
         var tarefa = new Tarefa();
         if (tarefaDTO.categoriaId() != null) {
-            Optional<Categoria> categoria = Optional.ofNullable(findCategoria.findById(tarefaDTO.categoriaId()));
-            if (!categoria.equals(null)) tarefa.setCategoria(categoria.get());
+            Categoria categoria = findCategoria.findById(tarefaDTO.categoriaId());
+            if (categoria != null) tarefa.setCategoria(categoria);
         }
         if (tarefaDTO.estado() != null){
             BeanUtils.copyProperties(tarefaDTO,tarefa);
