@@ -14,30 +14,24 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 public class TarefaController {
-    @Autowired SalvarTarefaService salvarTarefa;
-    @Autowired
-    FindCategoriaService findCategoria;
-
-    @Autowired FindTarefaByIdService findTarefaById;
-    @Autowired FindAllTarefaService findAllTarefa;
-    @Autowired FindTarefasByEstadoService findTarefasByEstado;
-    @Autowired FindTarefaByCategoriaService findTarefasByCategoria;
-
-    @Autowired ExcluirTarefaService excluirTarefa;
+    @Autowired private SalvarTarefaService salvarTarefa;
+    @Autowired private FindCategoriaService findCategoria;
+    @Autowired private FindTarefaService findTarefa;
+    @Autowired private ExcluirTarefaService excluirTarefa;
+    @Autowired private AtualizarTarefaService atualizarTarefa;
 
     @PostMapping("/tarefas")
-    public ResponseEntity<Tarefa> salvarTarefa(@RequestBody @Valid TarefaDTO tarefaDTO){
+    public ResponseEntity<Tarefa> salvaTarefa(@RequestBody @Valid TarefaDTO tarefaDTO){
         var tarefa = new Tarefa();
         if (tarefaDTO.categoriaId() != null) {
-            Optional<Categoria> categoria = Optional.ofNullable(findCategoria.findById(tarefaDTO.categoriaId()));
-            if (!categoria.equals(null)) tarefa.setCategoria(categoria.get());
+            Categoria categoria = findCategoria.findById(tarefaDTO.categoriaId());
+            if (categoria != null) tarefa.setCategoria(categoria);
         }
         if (tarefaDTO.estado() != null){
             BeanUtils.copyProperties(tarefaDTO,tarefa);
@@ -53,9 +47,9 @@ public class TarefaController {
             @RequestParam(value = "categoria",required = false) Long categoriaId){
         List<Tarefa> listTarefas;
         if (categoriaId != null){
-            listTarefas = findTarefasByCategoria.executar(categoriaId);
+            listTarefas = findTarefa.findTarefasByCategoria(categoriaId);
         } else{
-            listTarefas = findAllTarefa.executar();
+            listTarefas = findTarefa.findAll();
         }
         if (!listTarefas.isEmpty()){
             for (Tarefa tarefa:listTarefas){
@@ -68,7 +62,7 @@ public class TarefaController {
 
     @GetMapping("/tarefas/{id}")
     public ResponseEntity<Tarefa> findOneTarefa(@PathVariable(value = "id") long id){
-        var tarefaO = findTarefaById.executar(id);
+        var tarefaO = findTarefa.findById(id);
         tarefaO.add(linkTo(TarefaController.class).slash("tarefas").withRel("Tarefas list"));
 
         return ResponseEntity.status(HttpStatus.OK).body(tarefaO);
@@ -76,7 +70,7 @@ public class TarefaController {
 
     @GetMapping("/tarefas/backlog")
     public ResponseEntity<List<Tarefa>> findAllBacklogTarefas(){
-        var listBacklogTarefas = findTarefasByEstado.executar(Estado.BACKLOG);
+        var listBacklogTarefas = findTarefa.findTarefasByEstado(Estado.BACKLOG);
         if (!listBacklogTarefas.isEmpty()){
             for (Tarefa tarefa:listBacklogTarefas){
                 long id = tarefa.getId();
@@ -88,7 +82,7 @@ public class TarefaController {
 
     @GetMapping("/tarefas/em-andamento")
     public ResponseEntity<List<Tarefa>> findAllEmAndamentoTarefas(){
-        var listEmAndamentoTarefas = findTarefasByEstado.executar(Estado.EM_ANDAMENTO);
+        var listEmAndamentoTarefas = findTarefa.findTarefasByEstado(Estado.EM_ANDAMENTO);
         if (!listEmAndamentoTarefas.isEmpty()){
             for (Tarefa tarefa:listEmAndamentoTarefas){
                 long id = tarefa.getId();
@@ -100,7 +94,7 @@ public class TarefaController {
 
     @GetMapping("/tarefas/atrasadas")
     public ResponseEntity<List<Tarefa>> findAllAtrasadaTarefas(){
-        var listAtrasadaTarefas = findTarefasByEstado.executar(Estado.ATRASADA);
+        var listAtrasadaTarefas = findTarefa.findTarefasByEstado(Estado.ATRASADA);
         if (!listAtrasadaTarefas.isEmpty()){
             for (Tarefa tarefa:listAtrasadaTarefas){
                 long id = tarefa.getId();
@@ -112,7 +106,7 @@ public class TarefaController {
 
     @GetMapping("/tarefas/concluidas")
     public ResponseEntity<List<Tarefa>> findAllConcluidaTarefas(){
-        var listConcluidaTarefas = findTarefasByEstado.executar(Estado.CONCLUIDA);
+        var listConcluidaTarefas = findTarefa.findTarefasByEstado(Estado.CONCLUIDA);
         if (!listConcluidaTarefas.isEmpty()){
             for (Tarefa tarefa:listConcluidaTarefas){
                 long id = tarefa.getId();
@@ -122,11 +116,35 @@ public class TarefaController {
         return ResponseEntity.status(HttpStatus.OK).body(listConcluidaTarefas);
     }
 
+    @PutMapping("/tarefas/{id}")
+    public ResponseEntity<Object> atualizaTarefa(@PathVariable(value = "id") long id,
+                                                  @RequestBody @Valid TarefaDTO tarefaDTO){
 
+        var tarefa = findTarefa.findById(id);
+        if (tarefaDTO.categoriaId() != null) {
+            Categoria categoria = findCategoria.findById(tarefaDTO.categoriaId());
+            if (categoria != null) tarefa.setCategoria(categoria);
+        }
+        if (tarefaDTO.estado() != null){
+            BeanUtils.copyProperties(tarefaDTO,tarefa);
+        }
+        else {
+            BeanUtils.copyProperties(tarefaDTO, tarefa, "estado");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(atualizarTarefa.atualizar(tarefa));
+    }
+
+    @PatchMapping("/tarefas/{id}/categoria")
+    public ResponseEntity<Object> atualizarCategoriaTarefa(
+            @PathVariable(value = "id") Long tarefaId,
+            @RequestParam(value = "categoriaId", required = false) Long categoriaId){
+
+        return ResponseEntity.status(HttpStatus.OK).body(atualizarTarefa.atualizarCategoriaTarefa(tarefaId,categoriaId));
+    }
 
     @DeleteMapping("/tarefas/{id}")
     public ResponseEntity<Object> deletarTarefa(@PathVariable(value = "id") long id){
-        var tarefa = findTarefaById.executar(id);
+        var tarefa = findTarefa.findById(id);
         return ResponseEntity.status(HttpStatus.OK).body(excluirTarefa.executar(tarefa));
     }
 }

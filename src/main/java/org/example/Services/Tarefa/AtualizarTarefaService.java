@@ -1,20 +1,24 @@
 package org.example.Services.Tarefa;
 
+import org.example.Model.Categoria;
 import org.example.Model.Estado;
 import org.example.Model.Tarefa;
+import org.example.Repository.CategoriaRepository;
 import org.example.Repository.TarefaRepository;
+import org.example.Utils.CategoriaNotFoundException;
 import org.example.Utils.TarefaExistenteException;
 import org.example.Utils.TarefaNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Service
 public class AtualizarTarefaService {
     @Autowired
     private TarefaRepository tarefaRepository;
+
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
     @Autowired
     private AgendarTarefaService agendarTarefa;
@@ -34,16 +38,18 @@ public class AtualizarTarefaService {
         return updatedTarefa;
     }
 
-    public void setTarefaAtrasada(Tarefa tarefa){
-        if (tarefa.getEstado().equals(Estado.CONCLUIDA))
-            throw new IllegalArgumentException("Esta tarefa já foi concluída.");
-        if (tarefa.getEstado().equals(Estado.ATRASADA))
-            throw new IllegalArgumentException("Esta tarefa já está atrasada.");
-        if (tarefa.getDataVencimento().isAfter(LocalDateTime.now()))
-            throw new IllegalArgumentException("Esta tarefa ainda está dentro do prazo.");
+    public Tarefa atualizarCategoriaTarefa(Long tarefaId, Long categoriaId) {
+        Tarefa tarefa = tarefaRepository.findById(tarefaId)
+                .orElseThrow(TarefaNotFoundException::new);
 
-        tarefa.setEstado(Estado.ATRASADA);
-        tarefaRepository.save(tarefa);
+        if (categoriaId != null) {
+            Categoria categoria = categoriaRepository.findById(categoriaId)
+                    .orElseThrow(CategoriaNotFoundException::new);
+            tarefa.setCategoria(categoria);
+        } else {
+            tarefa.setCategoria(null);  // Remove a categoria
+        }
+        return tarefaRepository.save(tarefa);
     }
 
     private boolean validEstado(Tarefa tarefa, Estado estado){

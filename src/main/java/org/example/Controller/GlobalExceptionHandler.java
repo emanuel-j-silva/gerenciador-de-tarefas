@@ -34,23 +34,10 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleTarefaNotFoundException(TarefaNotFoundException ex){
         return ResponseEntity.badRequest().body(ex.getMessage());
     }
-    @ExceptionHandler(TarefaListIsEmptyException.class)
-    public ResponseEntity<String> handleTarefaListIsEmptyException(TarefaListIsEmptyException ex){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
-    }
-
-    @ExceptionHandler(TarefaEstadoListIsEmptyException.class)
-    public ResponseEntity<String> handleTarefaEstadoListIsEmptyException(TarefaEstadoListIsEmptyException ex){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
-    }
 
     @ExceptionHandler(TarefaEstadoCriacaoException.class)
     public ResponseEntity<String> handleTarefaEstadoCriacaoException(TarefaEstadoCriacaoException ex){
         return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(ex.getMessage());
     }
 
-    @ExceptionHandler(TarefaCategoriaListIsEmptyException.class)
-    public ResponseEntity<String> handleTarefaCategoriaListIsEmptyException(TarefaCategoriaListIsEmptyException ex){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
-    }
 }
