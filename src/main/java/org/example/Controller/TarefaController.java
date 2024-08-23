@@ -25,11 +25,7 @@ public class TarefaController {
     @Autowired
     FindCategoriaService findCategoria;
 
-    @Autowired FindTarefaByIdService findTarefaById;
-    @Autowired FindAllTarefaService findAllTarefa;
-    @Autowired FindTarefasByEstadoService findTarefasByEstado;
-    @Autowired FindTarefaByCategoriaService findTarefasByCategoria;
-
+    @Autowired private FindTarefaService findTarefa;
     @Autowired ExcluirTarefaService excluirTarefa;
 
     @PostMapping("/tarefas")
@@ -53,9 +49,9 @@ public class TarefaController {
             @RequestParam(value = "categoria",required = false) Long categoriaId){
         List<Tarefa> listTarefas;
         if (categoriaId != null){
-            listTarefas = findTarefasByCategoria.executar(categoriaId);
+            listTarefas = findTarefa.findTarefasByCategoria(categoriaId);
         } else{
-            listTarefas = findAllTarefa.executar();
+            listTarefas = findTarefa.findAll();
         }
         if (!listTarefas.isEmpty()){
             for (Tarefa tarefa:listTarefas){
@@ -68,7 +64,7 @@ public class TarefaController {
 
     @GetMapping("/tarefas/{id}")
     public ResponseEntity<Tarefa> findOneTarefa(@PathVariable(value = "id") long id){
-        var tarefaO = findTarefaById.executar(id);
+        var tarefaO = findTarefa.findById(id);
         tarefaO.add(linkTo(TarefaController.class).slash("tarefas").withRel("Tarefas list"));
 
         return ResponseEntity.status(HttpStatus.OK).body(tarefaO);
@@ -76,7 +72,7 @@ public class TarefaController {
 
     @GetMapping("/tarefas/backlog")
     public ResponseEntity<List<Tarefa>> findAllBacklogTarefas(){
-        var listBacklogTarefas = findTarefasByEstado.executar(Estado.BACKLOG);
+        var listBacklogTarefas = findTarefa.findTarefasByEstado(Estado.BACKLOG);
         if (!listBacklogTarefas.isEmpty()){
             for (Tarefa tarefa:listBacklogTarefas){
                 long id = tarefa.getId();
@@ -88,7 +84,7 @@ public class TarefaController {
 
     @GetMapping("/tarefas/em-andamento")
     public ResponseEntity<List<Tarefa>> findAllEmAndamentoTarefas(){
-        var listEmAndamentoTarefas = findTarefasByEstado.executar(Estado.EM_ANDAMENTO);
+        var listEmAndamentoTarefas = findTarefa.findTarefasByEstado(Estado.EM_ANDAMENTO);
         if (!listEmAndamentoTarefas.isEmpty()){
             for (Tarefa tarefa:listEmAndamentoTarefas){
                 long id = tarefa.getId();
@@ -100,7 +96,7 @@ public class TarefaController {
 
     @GetMapping("/tarefas/atrasadas")
     public ResponseEntity<List<Tarefa>> findAllAtrasadaTarefas(){
-        var listAtrasadaTarefas = findTarefasByEstado.executar(Estado.ATRASADA);
+        var listAtrasadaTarefas = findTarefa.findTarefasByEstado(Estado.ATRASADA);
         if (!listAtrasadaTarefas.isEmpty()){
             for (Tarefa tarefa:listAtrasadaTarefas){
                 long id = tarefa.getId();
@@ -112,7 +108,7 @@ public class TarefaController {
 
     @GetMapping("/tarefas/concluidas")
     public ResponseEntity<List<Tarefa>> findAllConcluidaTarefas(){
-        var listConcluidaTarefas = findTarefasByEstado.executar(Estado.CONCLUIDA);
+        var listConcluidaTarefas = findTarefa.findTarefasByEstado(Estado.CONCLUIDA);
         if (!listConcluidaTarefas.isEmpty()){
             for (Tarefa tarefa:listConcluidaTarefas){
                 long id = tarefa.getId();
@@ -122,11 +118,9 @@ public class TarefaController {
         return ResponseEntity.status(HttpStatus.OK).body(listConcluidaTarefas);
     }
 
-
-
     @DeleteMapping("/tarefas/{id}")
     public ResponseEntity<Object> deletarTarefa(@PathVariable(value = "id") long id){
-        var tarefa = findTarefaById.executar(id);
+        var tarefa = findTarefa.findById(id);
         return ResponseEntity.status(HttpStatus.OK).body(excluirTarefa.executar(tarefa));
     }
 }
