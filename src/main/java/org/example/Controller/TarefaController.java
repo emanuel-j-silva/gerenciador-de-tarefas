@@ -22,7 +22,6 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class TarefaController {
     @Autowired private SalvarTarefaService salvarTarefa;
     @Autowired private FindCategoriaService findCategoria;
-
     @Autowired private FindTarefaService findTarefa;
     @Autowired private ExcluirTarefaService excluirTarefa;
     @Autowired private AtualizarTarefaService atualizarTarefa;
