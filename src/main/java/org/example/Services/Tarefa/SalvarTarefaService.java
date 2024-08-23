@@ -26,7 +26,7 @@ public class SalvarTarefaService {
        }
 
         Tarefa savedTarefa = tarefaRepository.save(tarefa);
-        agendarTarefa.agendarAtualizacaoTarefa(tarefa);
-       return savedTarefa;
+       agendarTarefa.agendarVerificacaoTarefa(savedTarefa);
+        return savedTarefa;
     }
 }

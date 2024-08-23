@@ -29,9 +29,9 @@ public class AtualizarTarefaService {
         if (tarefaRepository.existsByDescricaoAndIdNot(tarefa.getDescricao(), tarefa.getId()))
             throw new TarefaExistenteException(tarefa.getDescricao());
 
-        Tarefa savedTarefa = tarefaRepository.save(tarefa);
-        agendarTarefa.agendarAtualizacaoTarefa(tarefa);
-        return savedTarefa;
+        Tarefa updatedTarefa = tarefaRepository.save(tarefa);
+        agendarTarefa.agendarVerificacaoTarefa(updatedTarefa);
+        return updatedTarefa;
     }
 
     public void setTarefaAtrasada(Tarefa tarefa){

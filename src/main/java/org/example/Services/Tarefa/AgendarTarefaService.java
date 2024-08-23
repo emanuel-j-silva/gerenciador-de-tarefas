@@ -17,15 +17,16 @@ public class AgendarTarefaService {
     private ScheduledExecutorService scheduledExecutorService;
 
     @Autowired
-    private AtualizarTarefaService atualizarTarefaService;
+    private AtualizacaoAutomaticaTarefaService atualizacaoAutomaticaTarefa;
 
-    public void agendarAtualizacaoTarefa(Tarefa tarefa){
-        long delay = Duration.between(LocalDateTime.now(),tarefa.getDataVencimento()).toMillis();
-        scheduledExecutorService.schedule(() -> {
-            if (!tarefa.getEstado().equals(Estado.ATRASADA) && !tarefa.getEstado().equals(Estado.CONCLUIDA)) {
-                atualizarTarefaService.setTarefaAtrasada(tarefa);
-                }
-            }, delay, TimeUnit.MILLISECONDS
-        );
+    public void agendarVerificacaoTarefa(Tarefa tarefa){
+        LocalDateTime dataVencimento = tarefa.getDataVencimento();
+        if (dataVencimento != null){
+            long delay = Duration.between(LocalDateTime.now(),tarefa.getDataVencimento()).toMillis();
+            scheduledExecutorService.schedule(
+                    ()-> atualizacaoAutomaticaTarefa.verificarEAtualizarTarefa(tarefa), delay,TimeUnit.MILLISECONDS
+            );
+        }
+
     }
 }
