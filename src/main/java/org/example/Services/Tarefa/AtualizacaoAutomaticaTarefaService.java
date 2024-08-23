@@ -16,7 +16,8 @@ public class AtualizacaoAutomaticaTarefaService {
 
     public void verificarEAtualizarTarefa(Tarefa tarefa) {
         if (tarefa.getEstado() != Estado.ATRASADA && tarefa.getEstado() != Estado.CONCLUIDA) {
-            if (tarefa.getDataVencimento().isBefore(LocalDateTime.now())) {
+            LocalDateTime dataVencimento = tarefa.getDataVencimento();
+            if (dataVencimento != null && dataVencimento.isBefore(LocalDateTime.now())) {
                 tarefa.setEstado(Estado.ATRASADA);
                 tarefaRepository.save(tarefa);
             }
