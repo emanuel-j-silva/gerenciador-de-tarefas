@@ -25,9 +25,10 @@ public class TarefaController {
 
     @Autowired private FindTarefaService findTarefa;
     @Autowired private ExcluirTarefaService excluirTarefa;
+    @Autowired private AtualizarTarefaService atualizarTarefa;
 
     @PostMapping("/tarefas")
-    public ResponseEntity<Tarefa> salvarTarefa(@RequestBody @Valid TarefaDTO tarefaDTO){
+    public ResponseEntity<Tarefa> salvaTarefa(@RequestBody @Valid TarefaDTO tarefaDTO){
         var tarefa = new Tarefa();
         if (tarefaDTO.categoriaId() != null) {
             Categoria categoria = findCategoria.findById(tarefaDTO.categoriaId());
@@ -114,6 +115,32 @@ public class TarefaController {
             }
         }
         return ResponseEntity.status(HttpStatus.OK).body(listConcluidaTarefas);
+    }
+
+    @PutMapping("/tarefas/{id}")
+    public ResponseEntity<Object> atualizaTarefa(@PathVariable(value = "id") long id,
+                                                  @RequestBody @Valid TarefaDTO tarefaDTO){
+
+        var tarefa = findTarefa.findById(id);
+        if (tarefaDTO.categoriaId() != null) {
+            Categoria categoria = findCategoria.findById(tarefaDTO.categoriaId());
+            if (categoria != null) tarefa.setCategoria(categoria);
+        }
+        if (tarefaDTO.estado() != null){
+            BeanUtils.copyProperties(tarefaDTO,tarefa);
+        }
+        else {
+            BeanUtils.copyProperties(tarefaDTO, tarefa, "estado");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(atualizarTarefa.atualizar(tarefa));
+    }
+
+    @PatchMapping("/tarefas/{id}/categoria")
+    public ResponseEntity<Object> atualizarCategoriaTarefa(
+            @PathVariable(value = "id") Long tarefaId,
+            @RequestParam(value = "categoriaId", required = false) Long categoriaId){
+
+        return ResponseEntity.status(HttpStatus.OK).body(atualizarTarefa.atualizarCategoriaTarefa(tarefaId,categoriaId));
     }
 
     @DeleteMapping("/tarefas/{id}")
