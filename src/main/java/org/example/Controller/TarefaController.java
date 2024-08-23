@@ -21,12 +21,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 public class TarefaController {
-    @Autowired SalvarTarefaService salvarTarefa;
-    @Autowired
-    FindCategoriaService findCategoria;
+    @Autowired private SalvarTarefaService salvarTarefa;
+    @Autowired private FindCategoriaService findCategoria;
 
     @Autowired private FindTarefaService findTarefa;
-    @Autowired ExcluirTarefaService excluirTarefa;
+    @Autowired private ExcluirTarefaService excluirTarefa;
 
     @PostMapping("/tarefas")
     public ResponseEntity<Tarefa> salvarTarefa(@RequestBody @Valid TarefaDTO tarefaDTO){
